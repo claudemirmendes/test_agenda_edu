@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1 align="center">Mensagens</h1>
+<button ><%= link_to 'Arquivar todas', archive_all_messages_path , method: :put%> </button>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Mensagem</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @messages.each do |message| %>
+      <tr>
+        <!-- <td id="message"><%= link_to message.text, message_path(message) %> </td>-->
+        <% if message.read ==  false %>
+          <td><b><%= link_to message.text, message_path(message) %></b></td>
+        <% else %>
+          <td><%= link_to message.text, message_path(message) %> </td>
+      <% end %>
+        <td><button><%= link_to 'Arquivar', archive_message_path(message),method: :put %></button></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<button type="button" class="btn btn-default btn-sm glyphicon glyphicon-envelope"><%= link_to 'Escreva uma nova mensagem', new_message_path %> <br></button> <br>
+
+<%= link_to('Logout', destroy_user_session_path, method: :delete) %> 
